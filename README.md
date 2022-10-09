@@ -2,4 +2,4 @@
 
 Check Backend code
 
-## Github link - Backend [https://github.com/rahat9016/Online-shop-backend]
+## Github link - Backend [https://github.com/ashikbhuyan17/online-shop-backend-udemy]
