@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { login } from "../../actions/user/userAction";
 import { auth } from "../../firebase";
 import { createOrUpdateUser } from "../../functions/auth";
 
@@ -39,26 +40,22 @@ const RegistrationComplete = () => {
 
         // get user id token
         let user = auth.currentUser;
-        console.log("user", user)
         await user.updatePassword(password);
         const idTokenResult = await user.getIdTokenResult();
-        console.log("idTokenResult", idTokenResult);
 
-        // createOrUpdateUser(idTokenResult.token)
-        //   .then((res) => {
-        //     dispatch({
-        //       type: "LOGGED_IN_USER",
-        //       payload: {
-        //         email: res.data.email,
-        //         name: res.data.name,
-        //         token: idTokenResult.token,
-        //         role: res.data.role,
-        //         _id: res.data._id,
-        //       },
-        //     });
-        //   })
-        //   .catch((error) => console.log(error));
-        // history.push("/");
+        createOrUpdateUser(idTokenResult.token)
+          .then((res) => {
+            const data = {
+              email: res.data.email,
+              name: res.data.name,
+              token: idTokenResult.token,
+              role: res.data.role,
+              _id: res.data._id,
+            }
+            dispatch(login(data));
+          })
+          .catch((error) => console.log(error));
+        history.push("/");
       }
     } catch (error) {
       console.log(error);

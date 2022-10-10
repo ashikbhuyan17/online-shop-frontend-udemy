@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { login } from "../../actions/user/userAction";
 import { auth, googleAuthProvider } from "../../firebase";
 import { createOrUpdateUser } from "../../functions/auth";
 
@@ -49,26 +50,17 @@ const Login = () => {
       const result = await auth.signInWithEmailAndPassword(email, password);
       const { user } = result;
       const idTokenResult = await user.getIdTokenResult();
-      // dispatch({
-      //   type: "LOGGED_IN_USER",
-      //   payload: {
-      //     email: user.email,
-      //     token: idTokenResult.token
-      //   },
-      // });
       createOrUpdateUser(idTokenResult.token)
         .then((res) => {
           console.log("res", res);
-          dispatch({
-            type: "LOGGED_IN_USER",
-            payload: {
-              email: res.data.email,
-              name: res.data.name,
-              token: idTokenResult.token,
-              role: res.data.role,
-              _id: res.data._id,
-            },
-          });
+          const data = {
+            email: res.data.email,
+            name: res.data.name,
+            token: idTokenResult.token,
+            role: res.data.role,
+            _id: res.data._id,
+          }
+          dispatch(login(data));
           roleBaseRedirect(res);
         })
         .catch((error) => console.log(error));

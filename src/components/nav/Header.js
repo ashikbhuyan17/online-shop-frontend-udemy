@@ -29,7 +29,7 @@ const Header = () => {
   const logout = () => {
     firebase.auth().signOut();
     dispatch({
-      type: "LOGOUT",
+      type: "user/logout",
       payload: null,
     });
     history.push("/login");

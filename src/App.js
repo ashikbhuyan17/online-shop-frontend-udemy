@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { login } from "./actions/user/userAction";
 import SideDrawer from "./components/drawer/SideDrawer";
 import Header from "./components/nav/Header";
 import AdminRoute from "./components/routes/AdminRoute";
@@ -43,28 +44,18 @@ function App() {
       console.log("uer", user)
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: {
-            email: user.email,
-            token: idTokenResult.token
-          }
-        })
-        // currentUser(idTokenResult.token)
-        //   .then((res) => {
-        //     console.log("app res", res.data);
-        //     dispatch({
-        //       type: "LOGGED_IN_USER",
-        //       payload: {
-        //         email: res.data.email,
-        //         name: res.data.name,
-        //         token: idTokenResult.token,
-        //         role: res.data.role,
-        //         _id: res.data._id,
-        //       },
-        //     });
-        //   })
-        //   .catch((error) => console.log(error));
+        currentUser(idTokenResult.token)
+          .then((res) => {
+            const data = {
+              email: res.data.email,
+              name: res.data.name,
+              token: idTokenResult.token,
+              role: res.data.role,
+              _id: res.data._id,
+            }
+            dispatch(login(data));
+          })
+          .catch((error) => console.log(error));
       }
       return () => unsubscribe;
     });
