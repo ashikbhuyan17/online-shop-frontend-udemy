@@ -34,26 +34,31 @@ const RegistrationComplete = () => {
       );
       console.log("Result", result);
       if (result.user.emailVerified) {
+        // remove user email from local storage
         window.localStorage.removeItem("emailForResister");
+
+        // get user id token
         let user = auth.currentUser;
+        console.log("user", user)
         await user.updatePassword(password);
         const idTokenResult = await user.getIdTokenResult();
+        console.log("idTokenResult", idTokenResult);
 
-        createOrUpdateUser(idTokenResult.token)
-          .then((res) => {
-            dispatch({
-              type: "LOGGED_IN_USER",
-              payload: {
-                email: res.data.email,
-                name: res.data.name,
-                token: idTokenResult.token,
-                role: res.data.role,
-                _id: res.data._id,
-              },
-            });
-          })
-          .catch((error) => console.log(error));
-        history.push("/");
+        // createOrUpdateUser(idTokenResult.token)
+        //   .then((res) => {
+        //     dispatch({
+        //       type: "LOGGED_IN_USER",
+        //       payload: {
+        //         email: res.data.email,
+        //         name: res.data.name,
+        //         token: idTokenResult.token,
+        //         role: res.data.role,
+        //         _id: res.data._id,
+        //       },
+        //     });
+        //   })
+        //   .catch((error) => console.log(error));
+        // history.push("/");
       }
     } catch (error) {
       console.log(error);

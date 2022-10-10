@@ -43,20 +43,28 @@ function App() {
       console.log("uer", user)
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
-        currentUser(idTokenResult.token)
-          .then((res) => {
-            dispatch({
-              type: "LOGGED_IN_USER",
-              payload: {
-                email: res.data.email,
-                name: res.data.name,
-                token: idTokenResult.token,
-                role: res.data.role,
-                _id: res.data._id,
-              },
-            });
-          })
-          .catch((error) => console.log(error));
+        dispatch({
+          type: "LOGGED_IN_USER",
+          payload: {
+            email: user.email,
+            token: idTokenResult.token
+          }
+        })
+        // currentUser(idTokenResult.token)
+        //   .then((res) => {
+        //     console.log("app res", res.data);
+        //     dispatch({
+        //       type: "LOGGED_IN_USER",
+        //       payload: {
+        //         email: res.data.email,
+        //         name: res.data.name,
+        //         token: idTokenResult.token,
+        //         role: res.data.role,
+        //         _id: res.data._id,
+        //       },
+        //     });
+        //   })
+        //   .catch((error) => console.log(error));
       }
       return () => unsubscribe;
     });

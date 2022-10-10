@@ -44,7 +44,7 @@ const Header = () => {
           <Link to="/shop">Shop</Link>
         </Item>
         <Item key="cart" icon={<ShoppingCartOutlined />}>
-          <Link to="/cart"><Badge count={cart.length} offset={[9,0]}>Cart </Badge></Link>
+          <Link to="/cart"><Badge count={cart.length} offset={[9, 0]}>Cart </Badge></Link>
         </Item>
         {!user && (
           <Item className="ml-auto" key="resister" icon={<UserAddOutlined />}>

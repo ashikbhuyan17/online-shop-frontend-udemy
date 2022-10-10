@@ -35,7 +35,7 @@ const Resister = () => {
         className="form-control"
       />
       <button type="submit" className="btn btn-raised">
-        Resister
+        Register
       </button>
     </form>
   );
@@ -43,7 +43,7 @@ const Resister = () => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <h4>Resister</h4>
+          <h4>Register</h4>
 
           {resisterFrom()}
         </div>

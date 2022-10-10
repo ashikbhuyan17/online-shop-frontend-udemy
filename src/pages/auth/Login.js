@@ -12,9 +12,9 @@ const Login = () => {
   const history = useHistory();
   const location = useLocation();
   const [email, setEmail] = useState(
-    "rahat.official.info9016@gmail.com bombusbd9014@gmail.com"
+    "ashik.bongo@gmail.com"
   ); //rahat.official.info9016@gmail.com
-  const [password, setPassword] = useState("rahat9016"); //rahat9016
+  const [password, setPassword] = useState("ashik183"); //rahat9016
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => ({ ...state }));
 
@@ -49,6 +49,13 @@ const Login = () => {
       const result = await auth.signInWithEmailAndPassword(email, password);
       const { user } = result;
       const idTokenResult = await user.getIdTokenResult();
+      // dispatch({
+      //   type: "LOGGED_IN_USER",
+      //   payload: {
+      //     email: user.email,
+      //     token: idTokenResult.token
+      //   },
+      // });
       createOrUpdateUser(idTokenResult.token)
         .then((res) => {
           console.log("res", res);
