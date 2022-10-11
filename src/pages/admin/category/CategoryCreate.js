@@ -32,7 +32,7 @@ const CategoryCreate = () => {
       .then((res) => {
         setLoading(false);
         setName("");
-        toast.success(`${res.data.name}`);
+        toast.success(`${res.data.name} is created`);
         loadCategories();
       })
       .catch((error) => {
@@ -77,7 +77,7 @@ const CategoryCreate = () => {
             <CategoryForms
               handleSubmit={handleSubmit}
               name={name}
-              setName={setName}
+              setName={setName} 
             />
             <hr />
             {/* Step Two */}
