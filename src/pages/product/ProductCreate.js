@@ -11,7 +11,7 @@ const initialState = {
   title: "",
   description: "",
   price: "",
-  categories: "",
+  categories: [],
   category: "",
   subs: [],
   shipping: "",
@@ -48,6 +48,7 @@ const ProductCreate = () => {
         console.log(error);
       });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     createProduct(values, user.token)
@@ -62,10 +63,12 @@ const ProductCreate = () => {
         if (error.response.status === 400) toast.error(error.response.data);
       });
   };
+
   const handleChange = (e) => {
     e.preventDefault();
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
   const handleCategoryChange = (e) => {
     e.preventDefault();
     console.log(e.target.value);
@@ -78,6 +81,7 @@ const ProductCreate = () => {
       .catch();
     setShowSub(true);
   };
+  
   return (
     <div className="container-fluid">
       <div className="row">

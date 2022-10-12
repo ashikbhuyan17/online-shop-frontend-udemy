@@ -8,6 +8,9 @@ const FileUpload = ({ values, setValues, setLoading }) => {
 
   const fileUploadAndResize = (e) => {
     let files = e.target.files;
+    // resize
+    // send back to server to upload to cloudinary
+    // set url to images[] in parent component - productCreate
     let allUploadedFiles = values.images;
     if (files) {
       setLoading(true);
