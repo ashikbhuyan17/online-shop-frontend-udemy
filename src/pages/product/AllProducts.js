@@ -24,6 +24,7 @@ const AllProducts = () => {
         console.log(error);
       });
   };
+  
   const handleRemove = (slug) => {
     let answer = window.confirm("Delete ?");
     if (answer) {
@@ -38,6 +39,7 @@ const AllProducts = () => {
         });
     }
   };
+
   return (
     <>
       <div className="container-fluid">

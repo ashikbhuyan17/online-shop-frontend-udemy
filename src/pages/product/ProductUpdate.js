@@ -34,13 +34,17 @@ const ProductUpdate = () => {
   const { slug } = useParams();
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => ({ ...state }));
+
   useEffect(() => {
     loadProduct();
     loadCategories();
   }, []);
+
   const history = useHistory();
+
   const loadProduct = () => {
     getProduct(slug).then((p) => {
+      console.log("{ ...values, ...p.data }", {...p.data });
       setValues({ ...values, ...p.data });
       getCategorySubs(p.data.category._id).then((res) => {
         setSubOption(res.data);
@@ -62,6 +66,7 @@ const ProductUpdate = () => {
         console.log(error);
       });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -81,10 +86,12 @@ const ProductUpdate = () => {
         toast.error(error.response.data.error);
       });
   };
+
   const handleChange = (e) => {
     e.preventDefault();
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
   const handleCategoryChange = (e) => {
     e.preventDefault();
 
@@ -104,6 +111,7 @@ const ProductUpdate = () => {
     }
     setArrayOfSubs([]);
   };
+
   return (
     <div className="container-fluid">
       <div className="row">
