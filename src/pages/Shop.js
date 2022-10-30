@@ -49,11 +49,6 @@ const Shop = () => {
       setSubs(res.data);
     });
   }, []);
-  const fetchProducts = (arg) => {
-    fetchProductByFilter(arg).then((res) => {
-      setProducts(res.data);
-    });
-  };
   // 1 Load products by default page
   const loadAllProducts = () => {
     getProductByCount(12)
@@ -67,6 +62,11 @@ const Shop = () => {
       });
   };
 
+  const fetchProducts = (arg) => {
+    fetchProductByFilter(arg).then((res) => {
+      setProducts(res.data);
+    });
+  };
   // 2 load products on user search input
   useEffect(() => {
     const delayed = setTimeout(() => {
@@ -80,6 +80,7 @@ const Shop = () => {
 
   // 3 load products based on price range
   useEffect(() => {
+    console.log("price", price);
     fetchProducts({ price });
   }, [price]);
 
@@ -126,7 +127,8 @@ const Shop = () => {
     // setSub("");
     let inTheState = [...categoryIds];
     let justChecked = e.target.value;
-    let foundInTheState = inTheState.indexOf(justChecked);
+    let foundInTheState = inTheState.indexOf(justChecked);   //true or -1
+    console.log("foundInTheState", foundInTheState)
     if (foundInTheState === -1) {
       inTheState.push(justChecked);
     } else {
